@@ -1,12 +1,55 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, StyleSheet, Text, View, TextInput, FlatList } from 'react-native';
 
 export default function App() {
+
+  const [result, setResult] = useState('');
+  const [numb1, setNumb1] = useState('');
+  const [numb2, setNumb2] = useState('');
+
+  const calculate = func => {
+    const [n1, n2] = [Number(numb1), Number(numb2)];
+
+    switch (func) {
+      case '+':
+        setResult(n1 + n2);
+        break;
+      case '-':
+        setResult(n1 - n2);
+        break;
+    }
+    setNumb1('');
+    setNumb2('');
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <View style={styles.result}>
+        <Text>Result: {result} </Text>
+      </View>
+      <View style={styles.inputarea}>
+        <TextInput style={styles.textinput}
+          keyboardType='numeric'
+          onChangeText={text => setNumb1(text)}
+          value={numb1}
+        />
+        <TextInput style={styles.textinput}
+          keyboardType='numeric'
+          onChangeText={text => setNumb2(text)}
+          value={numb2}
+        />
+        <View style={styles.buttons}>
+          <View style={styles.func}>
+            <Button onPress={() => calculate('+')} title="+" />
+          </View>
+          <View style={styles.func}>
+            <Button onPress={() => calculate('-')} title="-" />
+          </View>
+        </View>
+      </View>
+      <View style={styles.history}>
+        <Text>History:</Text>
+      </View>
     </View>
   );
 }
@@ -14,8 +57,34 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+  },
+  result: {
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+  },
+  inputarea: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  textinput: {
+    width: '40%',
+    borderColor: 'grey',
+    borderWidth: 1,
+    padding: 5,
+    margin: 5,
+  },
+  buttons: {
+    width: '25%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  func: {
+    width: '50%',
+    padding: 5,
+  },
+  history: {
+    flex: 4,
+    alignItems: 'center'
   },
 });
