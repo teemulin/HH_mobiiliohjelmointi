@@ -18,21 +18,23 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>{sum}</Text>
-      <TextInput
-        style={styles.textinput}
-        keyboardType="numeric"
-        onChangeText={num1 => setNum1(num1)}
-        value={num1}
-      />
-      <TextInput 
-        style={styles.textinput}
-        keyboardType="numeric"
-        onChangeText={num2 => setNum2(num2)}
-        value={num2}
-      />
-      <Button onPress={sumButton} title="+" />
-      <Button onPress={minusButton} title="-" />
+        <Text>{sum}</Text>
+        <TextInput
+          style={styles.textinput}
+          keyboardType="numeric"
+          onChangeText={num1 => setNum1(num1)}
+          value={num1}
+        />
+        <TextInput 
+          style={styles.textinput}
+          keyboardType="numeric"
+          onChangeText={num2 => setNum2(num2)}
+          value={num2}
+        />
+      <View style={styles.buttons}>
+        <Button onPress={sumButton} title="+" />
+        <Button onPress={minusButton} title="-" />
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -44,6 +46,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  buttons: {
+    flexDirection: 'row',
   },
   textinput: {
     width: 150,
