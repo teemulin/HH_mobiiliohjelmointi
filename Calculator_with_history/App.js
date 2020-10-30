@@ -6,16 +6,18 @@ export default function App() {
   const [result, setResult] = useState('');
   const [numb1, setNumb1] = useState('');
   const [numb2, setNumb2] = useState('');
-
-  const calculate = func => {
+  const [history, setHistory] = useState([]);
+  
+  const calculate = (func) => {
     const [n1, n2] = [Number(numb1), Number(numb2)];
-
+ 
     switch (func) {
       case '+':
         setResult(n1 + n2);
-        break;
+        setHistory([...history, {key: (`${numb1} ${func} ${numb2} = ${n1+n2}`)}]);        break;
       case '-':
         setResult(n1 - n2);
+        setHistory([...history, {key: (`${numb1} ${func} ${numb2} = ${n1-n2}`)}]); 
         break;
     }
     setNumb1('');
@@ -49,6 +51,10 @@ export default function App() {
       </View>
       <View style={styles.history}>
         <Text>History:</Text>
+        <FlatList 
+        data={history}
+        renderItem={({item}) => <Text>{item.key}</Text>}
+        />
       </View>
     </View>
   );
