@@ -14,3 +14,4 @@ Coming soon:
 - Tehtävä 5: [Calculator with pages](/Calculator_with_pages/App.js)
 - Tehtävä 6: [Recipe Finder](/Recipe_finder/App.js)
 - Tehtävä 7: [Euro Converter](/Euro_converter/App.js)
+
