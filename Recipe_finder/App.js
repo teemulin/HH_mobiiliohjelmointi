@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Alert, Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, FlatList, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
 
@@ -8,11 +8,11 @@ export default function App() {
   const [recipes, setRecipes] = useState([]);
 
   const getRecipes = () => {
-    const url = `http://www.recipepuppy.com/api/?i=${desc}`
+    const url = `http://www.recipepuppy.com/api/?i=${desc}`;
     fetch(url)
     .then(response => response.json())
     .then(data => {
-      setRecipes(data);
+      setRecipes(data.results);
     })
     .catch((error) => {
       Alert.alert('Error', error.message);
@@ -34,7 +34,17 @@ export default function App() {
       <View style={styles.results}>
         <FlatList
           keyExtractor={item => item.href} 
-          renderItem={({ item }) => <Text>{item.title}</Text>}
+          renderItem={({ item }) => {
+            return (
+              <View>
+                <Text>{item.title}</Text>
+                <Image
+                  style={{width: 50, height: 50}}
+                  source={{url: `${item.thumbnail}`,}}
+                />
+              </View> 
+            );
+          }}                 
           data={recipes}
         />
       </View>
