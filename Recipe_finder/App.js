@@ -15,7 +15,7 @@ export default function App() {
       setRecipes(data);
     })
     .catch((error) => {
-      Alert.alert('Error', error);
+      Alert.alert('Error', error.message);
     });
   }
 
