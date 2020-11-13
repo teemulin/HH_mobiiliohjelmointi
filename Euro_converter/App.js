@@ -39,7 +39,7 @@ export default function App() {
         <TextInput
           style={styles.input} 
           placeholder='Ammount'
-          keyboardType='numeric'
+          keyboardType='decimal-pad'
           onChangeText={text => setText(text)}
           value={text}
         />
