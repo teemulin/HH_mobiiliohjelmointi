@@ -9,9 +9,10 @@ Done:
 - Tehtävä 3: [Calculator with history](/Calculator_with_history/App.js)
 - Tehtävä 4: [Shopping list](/Shopping_list/App.js)
 - Tehtävä 5: [Calculator with pages](/Calculator_with_pages/App.js)
+- Tehtävä 6: [Recipe Finder](/Recipe_finder/App.js) (Issues with fetching data)
+- Tehtävä 7: [Euro Converter](/Euro_converter/App.js)
 
 Coming soon:
 
-- Tehtävä 6: [Recipe Finder](/Recipe_finder/App.js)
-- Tehtävä 7: [Euro Converter](/Euro_converter/App.js)
+
 
