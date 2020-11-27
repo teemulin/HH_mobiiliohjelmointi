@@ -19,5 +19,3 @@ Coming soon:
 - Tehtävä 12: [Shopping list with Firebase](/Shopping_list_with_firebase/App.js)
 - Tehtävä 13: [Contacts](/Contacts/App.js)
 - Tehtävä 14: [Text to speech](/Text_to_speech/App.js)
-
-
