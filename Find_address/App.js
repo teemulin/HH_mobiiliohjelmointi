@@ -5,6 +5,8 @@ import MapView, { Marker } from 'react-native-maps';
 
 export default function App() {
 
+  const key = "insertYourKeyHere"
+
   const [place, setPlace] = useState('');
 
   const [region, setRegion] = useState({
@@ -22,7 +24,7 @@ export default function App() {
   });
 
   const findRegion = () => {
-      const url = `http://www.mapquestapi.com/geocoding/v1/address?key=mrEcjQGFmzWpbsyPz7Kgpw47X4xed2qA&location=${place}`
+      const url = `http://www.mapquestapi.com/geocoding/v1/address?key=${key}&location=${place}`
       console.log(url)
       fetch(url)
       .then(response => response.json())
