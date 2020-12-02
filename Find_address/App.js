@@ -1,22 +1,51 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert, Button, StyleSheet, TextInput, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+import * as Location from 'expo-location';
 
 export default function App() {
 
   const key = "insertYourKeyHere"
+
+  const [location, setLocation] = useState(null);
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  const getLocation = async () => {
+    let { status } = await Location.requestPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('No permission to access location!');
+    }
+    else {
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+      setRegion({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.03,
+      longitudeDelta:0.02
+      })
+      setCoordinates({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      })
+      setTitle("You are here")
+    }
+  }
 
   const [place, setPlace] = useState('');
 
   const [region, setRegion] = useState({
     latitude: 60.200692,
     longitude:24.934302,
-    latitudeDelta: 0.03,
-    longitudeDelta:0.02,
+    latitudeDelta: 15,
+    longitudeDelta:15,
   });
 
-  const [title, setTitle] = useState('Haaga-Helia')
+  const [title, setTitle] = useState('')
 
   const [coordinates, setCoordinates] = useState({
     latitude:60.201373,
@@ -28,10 +57,7 @@ export default function App() {
       console.log(url)
       fetch(url)
       .then(response => response.json())
-      .then(data => {
-        console.log(data.results[0].locations[0].street)
-      
-
+      .then(data => {              
         setRegion({
         latitude: data.results[0].locations[0].latLng.lat,
         longitude: data.results[0].locations[0].latLng.lng,
@@ -82,7 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   map: {
-    flex: 16,
+    flex: 17,
     width: "100%",
     height: "100%",
   },
