@@ -18,4 +18,7 @@ Done:
 
 Coming soon:
 (- Tehtävä 12: [Shopping list with Firebase](/Shopping_list_with_firebase/App.js))
+- Tehtävä 15: [Shopping list with polished UI](/Shopping_list_with_native_elements/App.js)
+- Tehtävä 16: [MyPlaces App](/MyPlaces_app/App.js)
+
 
