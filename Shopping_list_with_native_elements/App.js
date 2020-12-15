@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import * as SQLite from 'expo-sqlite';
-import { Header, Icon, Input, Button, ListItem } from 'react-native-elements';
+import { Header, Input, Button, ListItem } from 'react-native-elements';
 
 export default function App() {
 
@@ -54,38 +54,35 @@ export default function App() {
         <ListItem.Title>{item.text}</ListItem.Title>
         <ListItem.Subtitle>{item.amount}</ListItem.Subtitle>
       </ListItem.Content>
-      <ListItem.Chevron onPress={() => deleteItem(item.id)} />
+      <ListItem.Chevron iconProps={{type: 'material', name: 'trash', color: 'red', size: 25}}  onPress={() => deleteItem(item.id)} />
     </ListItem>
   )
 
   return (
-    <View>
+    <View style={styles.container}>
       <Header 
-        centerComponent={{ text: 'SHOPPING LIST', style: { color: '#fff' } }}
+        centerComponent={{ text: 'SHOPPING LIST', style: { color: '#fff', fontWeight: '700' } }}
+        rightComponent={<Button icon={{name: 'clear', color: 'red'}} onPress={clearButton} title='Clear' />}
       />
-      <View>
-        <Input 
-          placeholder='Product'
-          label='Product'
-          onChangeText={(text) => setText(text)}
-          value={text}
-        />
-        <Input
-          placeholder='Amount'
-          label='Amount'
-          onChangeText={(amount) => setAmount(amount)}
-          value={amount}
-        />
-        <View>
-          <Button raised icon={{name: 'save', color: '#fff'}} onPress={addButton} title='Save' />
-          <Button raised icon={{name: 'clear', color: '#fff'}} onPress={clearButton} title='Clear' />
-        </View>
+      <Input 
+        placeholder='Product'
+        label='Product'
+        onChangeText={(text) => setText(text)}
+        value={text}
+      />
+      <Input
+        placeholder='Amount'
+        label='Amount'
+        onChangeText={(amount) => setAmount(amount)}
+        value={amount}
+      />
+      <View style={styles.buttons}>
+        <Button raised icon={{name: 'save', color: '#fff'}} onPress={addButton} title='Save' />
       </View>
-
       <FlatList 
-        keyExtractor={item => item.id.toString()}
-        data={data}
-        renderItem={renderItem}
+      keyExtractor={item => item.id.toString()}
+      data={data}
+      renderItem={renderItem}
       />
       <StatusBar style="auto" />
     </View>
@@ -93,17 +90,13 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-    
-  flatlist: {
-    flexDirection: 'row',
+  
+  container: {
+    flex: 1,
   },
 
-  listitems: {
-    textAlign: 'center',
-    paddingRight: 5,
-  },
-
-  deleteitem: {
-    color: 'red',
+  buttons: {
+    width: 130,
+    alignSelf: 'center',
   },
 });
