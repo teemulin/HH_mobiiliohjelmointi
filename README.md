@@ -15,10 +15,11 @@ Done:
 - Tehtävä 11: [Shopping list with database](/Shopping_list_with_db/App.js)
 - Tehtävä 13: [Contacts](/Contacts/App.js)
 - Tehtävä 14: [Text to speech](/Text_to_speech/App.js)
+- Tehtävä 15: [Shopping list with polished UI](/Shopping_list_with_native_elements/App.js)
 
 Coming soon:
 (- Tehtävä 12: [Shopping list with Firebase](/Shopping_list_with_firebase/App.js))
-- Tehtävä 15: [Shopping list with polished UI](/Shopping_list_with_native_elements/App.js)
+
 - Tehtävä 16: [MyPlaces App](/MyPlaces_app/App.js)
 
 
