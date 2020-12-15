@@ -13,8 +13,9 @@ Done:
 - Tehtävä 7: [Euro Converter](/Euro_converter/App.js)
 - Tehtävät 8-10: [Find the address](/Find_address/App.js)
 - Tehtävä 11: [Shopping list with database](/Shopping_list_with_db/App.js)
+- Tehtävä 13: [Contacts](/Contacts/App.js)
 
 Coming soon:
 (- Tehtävä 12: [Shopping list with Firebase](/Shopping_list_with_firebase/App.js))
-- Tehtävä 13: [Contacts](/Contacts/App.js)
+
 - Tehtävä 14: [Text to speech](/Text_to_speech/App.js)
