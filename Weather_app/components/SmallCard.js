@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { Text, Card, Divider } from 'react-native-elements';
 
-const SmallCard = ({detail, location}) => {
+const SmallCard = ({detail}) => {
 
   let text;  
   let time;
@@ -18,10 +18,6 @@ const SmallCard = ({detail, location}) => {
 
   return (
     <Card containerStyle={styles.card}>
-      <Text style={styles.location}>{location}</Text>
-
-      <Divider style={styles.divider} />
-
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{uri:`https://openweathermap.org/img/w/${detail.weather[0].icon}.png`}} />
         <View style={{flexDirection: 'column'}}>
@@ -48,8 +44,9 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 20,
     alignSelf: 'center',
-    width: 120,
+    width: 90,
     height: 150,
+    margin: 2,
   },
 
   divider: {
@@ -58,7 +55,7 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column-reverse',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -80,8 +77,9 @@ const styles = StyleSheet.create({
   },
 
   weatherContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column-reverse',
     justifyContent: 'space-between',
+    alignItems: 'center'
   },
   
 	notes: {

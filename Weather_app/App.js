@@ -1,19 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, FlatList, Alert } from 'react-native';
+import { StyleSheet, View, FlatList, Alert, Text } from 'react-native';
+import { Input, Button } from 'react-native-elements';
 import * as Location from 'expo-location';
 import WeatherCard from './components/WeatherCard';
 import SmallCard from './components/SmallCard';
-import { API } from './utils/ApiInfo';
+import { API, geoAPI } from './utils/ApiInfo';
 
 export default function App() {
 
-  const [location, setLocation] = useState({lat:0, lon:0});
+  const [location, setLocation] = useState({lat:60.17, lon:24.94});
   const [forecast, setForecast] = useState([]);
+
+  const [place, setPlace] = useState('');
  
   useEffect(() => {
     getLocation();
   }, []);
+
+  useEffect(() => {
+    getWeather();
+  }, [location]);
 
   const getLocation = async () => {
     let { status } = await Location.requestPermissionsAsync();
@@ -27,11 +34,11 @@ export default function App() {
         lon: position.coords.longitude
       });
     }
-    getWeather();
+    
   }
 
   const getWeather = () => {
-    let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${API}`
+    let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&units=metric&cnt=4&appid=${API}`
     fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -39,18 +46,40 @@ export default function App() {
     })
   }
 
+  const searchButton = () => {
+    let url = `http://www.mapquestapi.com/geocoding/v1/address?key=${geoAPI}&location=${place}`
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      setLocation({
+        lat: data.results[0].locations[0].latLng.lat,
+        lon: data.results[0].locations[0].latLng.lng
+      })
+    })
+  }
+
   return (
     <View style={styles.container}>
-      <WeatherCard detail={forecast.list[0]} location={forecast.city.name} />
-      <FlatList 
-        data={forecast.list} 
-        style={{marginTop:20}}
-        horizontal={true} 
-        keyExtractor={item => item.dt_txt} 
-        renderItem={({item}) => 
-          <SmallCard detail={item} location={forecast.city.name} />
-        }
-      />
+      <View style={styles.toppart}>
+        <Input 
+          style={styles.search}
+          placeholder='Search for a city'
+          onChangeText={place => setPlace(place)}
+          value={place}
+        />
+        <Button raised icon={{name: 'search', color: '#fff'}} title='Show weather' onPress={searchButton} />
+
+      </View>
+      <View style={styles.bottompart}>
+        <FlatList 
+          data={forecast.list} 
+          style={{marginTop:20}}
+          keyExtractor={item => item.dt_txt} 
+          renderItem={({item}) => 
+            <WeatherCard detail={item} location={forecast.city.name} />
+          }
+        />
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -60,6 +89,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    justifyContent: 'center',
+  },
+
+  search: {
+    textAlign: 'center',
+  },
+
+  toppart: {
+    paddingTop: 80,
+    alignItems: 'center'
+  },
+
+  bottompart: {
+    flex: 1,
   },
 });
+
+//        <WeatherCard detail={forecast.list[0]} location={forecast.city.name} />
