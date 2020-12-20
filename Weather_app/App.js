@@ -4,8 +4,8 @@ import { StyleSheet, View, FlatList, Alert, Text } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import * as Location from 'expo-location';
 import WeatherCard from './components/WeatherCard';
-import SmallCard from './components/SmallCard';
 import { API, geoAPI } from './utils/ApiInfo';
+import { Keyboard } from 'react-native';
 
 export default function App() {
 
@@ -38,7 +38,7 @@ export default function App() {
   }
 
   const getWeather = () => {
-    let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&units=metric&cnt=4&appid=${API}`
+    let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${API}`
     fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -53,8 +53,10 @@ export default function App() {
     .then(data => {
       setLocation({
         lat: data.results[0].locations[0].latLng.lat,
-        lon: data.results[0].locations[0].latLng.lng
+        lon: data.results[0].locations[0].latLng.lng,
       })
+      setPlace('');
+      Keyboard.dismiss();
     })
   }
 
@@ -104,5 +106,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-//        <WeatherCard detail={forecast.list[0]} location={forecast.city.name} />
