@@ -11,6 +11,7 @@ export default function App() {
 
   const [location, setLocation] = useState({lat:60.17, lon:24.94});
   const [forecast, setForecast] = useState([]);
+  const [city, setCity] = useState('');
 
   const [place, setPlace] = useState('');
  
@@ -42,7 +43,8 @@ export default function App() {
     fetch(url)
     .then(response => response.json())
     .then(data => {
-      setForecast(data);
+      setForecast(data.list);
+      setCity(data.city.name);
     })
   }
 
@@ -73,12 +75,14 @@ export default function App() {
 
       </View>
       <View style={styles.bottompart}>
-        <FlatList 
-          data={forecast.list} 
+        <Text style={styles.listheader}>{city}</Text>
+        <FlatList
+          data={forecast} 
           style={{marginTop:20}}
+          horizontal={true}
           keyExtractor={item => item.dt_txt} 
           renderItem={({item}) => 
-            <WeatherCard detail={item} location={forecast.city.name} />
+            <WeatherCard detail={item} />
           }
         />
       </View>
@@ -103,6 +107,13 @@ const styles = StyleSheet.create({
   },
 
   bottompart: {
-    flex: 1,
+    
+  },
+
+  listheader: {
+    fontSize: 30,
+    marginTop: 10,
+    marginBottom: -15,
+    textAlign: 'center',
   },
 });

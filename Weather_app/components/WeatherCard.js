@@ -18,10 +18,6 @@ const WeathcerCard = ({detail, location}) => {
 
   return (
     <Card containerStyle={styles.card}>
-      <Text style={styles.location}>{location}</Text>
-
-      <Divider style={styles.divider} />
-
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{uri:`https://openweathermap.org/img/w/${detail.weather[0].icon}.png`}} />
         <View style={{flexDirection: 'column'}}>
@@ -43,23 +39,24 @@ const WeathcerCard = ({detail, location}) => {
 const styles = StyleSheet.create({
 
   card: {
-    backgroundColor: '#00BFFF',
+    backgroundColor: '#4682B4',
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 20,
     alignSelf: 'center',
-    width: '80%',
+    width: 130,
+    height: 300,
+    margin: 4,
   },
 
   divider: {
-    backgroundColor:'#fff',
-    marginVertical:4,
+    backgroundColor: '#fff',
+    marginVertical: 0,
   },
 
   imageContainer: {
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
+    flexDirection: 'column-reverse',
+    alignItems: 'center',
   },
 
   image: {
@@ -68,32 +65,33 @@ const styles = StyleSheet.create({
   },
 
   date: {
-    fontSize:20,
-    color:'#fff',
-    textAlign:'right',
+    fontSize: 20,
+    color: '#fff',
+    textAlign: 'center',
   },
   
 	time:{
-		fontSize:28,
-		color:'#fff',
+		fontSize: 26,
+		color: '#fff',
   },
 
   weatherContainer: {
-    flexDirection:'row',
-    justifyContent:'space-between',
+    flexDirection: 'column-reverse',
+    alignItems: 'center',
+    marginTop: 20,
   },
   
 	notes: {
-		fontSize:18,
-		color:'#fff',
-		textTransform:'capitalize',
+		fontSize: 18,
+		color: '#fff',
+		textTransform: 'capitalize',
   },
   
   location: {
-    fontSize:28,
-		color:'#fff',
-    textTransform:'capitalize',
-    textAlign:'center',
+    fontSize: 28,
+		color: '#fff',
+    textTransform: 'capitalize',
+    textAlign: 'center',
   },
 });
 
