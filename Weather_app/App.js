@@ -1,11 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, FlatList, Alert, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Alert, Text, Keyboard } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import * as Location from 'expo-location';
 import WeatherCard from './components/WeatherCard';
 import { API, geoAPI } from './utils/ApiInfo';
-import { Keyboard } from 'react-native';
 
 export default function App() {
 
@@ -34,8 +33,7 @@ export default function App() {
         lat: position.coords.latitude,
         lon: position.coords.longitude
       });
-    }
-    
+    }    
   }
 
   const getWeather = () => {
@@ -72,13 +70,12 @@ export default function App() {
           value={place}
         />
         <Button raised icon={{name: 'search', color: '#fff'}} title='Show weather' onPress={searchButton} />
-
       </View>
       <View style={styles.bottompart}>
         <Text style={styles.listheader}>{city}</Text>
         <FlatList
           data={forecast} 
-          style={{marginTop:20}}
+          style={{marginTop:10}}
           horizontal={true}
           keyExtractor={item => item.dt_txt} 
           renderItem={({item}) => 
@@ -103,7 +100,7 @@ const styles = StyleSheet.create({
 
   toppart: {
     paddingTop: 80,
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   bottompart: {
@@ -112,8 +109,7 @@ const styles = StyleSheet.create({
 
   listheader: {
     fontSize: 30,
-    marginTop: 10,
-    marginBottom: -15,
+    marginTop: 40,
     textAlign: 'center',
   },
 });

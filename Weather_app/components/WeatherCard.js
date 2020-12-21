@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { Text, Card, Divider } from 'react-native-elements';
 
-const WeathcerCard = ({detail, location}) => {
+const WeathcerCard = ({detail}) => {
 
   let text;  
   let time;
@@ -25,9 +25,7 @@ const WeathcerCard = ({detail, location}) => {
           <Text style={styles.time}>{time}</Text>
         </View>
       </View>
-
       <Divider style={styles.divider} />
-
       <View style={styles.weatherContainer}>
         <Text style={styles.notes}>{detail.weather[0].description}</Text>
         <Text style={styles.notes}>{Math.round( detail.main.temp * 10) / 10 }&#8451;</Text>
@@ -37,7 +35,6 @@ const WeathcerCard = ({detail, location}) => {
 }
 
 const styles = StyleSheet.create({
-
   card: {
     backgroundColor: '#4682B4',
     borderWidth: 1,
